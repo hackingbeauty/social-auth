@@ -1,0 +1,37 @@
+!!!
+%html
+
+  %head
+    %title
+      = yield(:title) || "Untitled"
+    = csrf_meta_tag
+
+    %meta{"http-equiv"=>"Content-Type", :content=>"text/html; charset=utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+	
+    = stylesheet_link_tag "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css"
+
+    = stylesheet_link_tag "application"  
+    = javascript_include_tag "application"
+    = javascript_include_tag "http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"
+
+    = yield(:head)
+
+  %body
+    #container
+        
+      .flash
+        - flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_#{name}"
+
+      - if show_title?
+        %h1= yield(:title)
+
+    %div{"data-role" => "page"}
+      %div{"data-role" => "header"}
+        %h1= yield :heading
+	  
+      %div{"data-role" => "content"}
+        = yield
+
+
