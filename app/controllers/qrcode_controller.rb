@@ -1,2 +1,0 @@
-class QrcodeController < ApplicationController
-end
